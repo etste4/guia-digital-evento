@@ -1,5 +1,38 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbwNthcDH5XbULL6YaEQjbivAeX6sLQ-x7gTTqwFrN2t-iC5IsYXgpMAKkZo39rbDIjqVQ/exec";
 
+const LIBROS = {
+  libro1: {
+    titulo: "La Recta Real",
+    autores: ["Dr. Cesar Castañeda Campos"],
+    descripcion: "Libro presentado por el Fondo Editorial UNH en el marco de la presentación de libros.",
+    imagen: "files/libro1.jpg"
+  },
+  libro2: {
+    titulo: "Herramientas de Planificación",
+    autores: [
+      "Joel Lenner Castañeda Dueñas",
+      "Elsa Castro Chauca",
+      "Jorge Garma Malpartida",
+      "Juan José Oré Rojas",
+      "Edith Yesica Olarte Huamán",
+      "Miguel Ángel Suárez Vargas",
+      "Hugo Saavedra Caballero",
+      "Fredy César Mendoza Cruz"
+    ],
+    descripcion: "Libro práctico y esencial para docentes y estudiantes que buscan fortalecer el pensamiento crítico mediante la planificación.",
+    imagen: "files/libro2.jpg"
+  },
+  libro3: {
+    titulo: "Prueba de Hipótesis Estadística",
+    autores: [
+      "Félix Amadeo Canales Conce",
+      "Franklin Poma Castellanos"
+    ],
+    descripcion: "Publicación aplicada a educación con soporte de Minitab.",
+    imagen: "files/libro3.jpg"
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   cargarPrograma();
   setInterval(cargarPrograma, 30000);
@@ -24,22 +57,21 @@ async function cargarPrograma() {
     const contenedor = document.getElementById("programaLista");
     contenedor.innerHTML = "";
 
-    const actual = programa.find(item => item.estado === "en_proceso");
-
-    document.getElementById("actividadActual").textContent = actual
-      ? actual.actividad
-      : "El evento se encuentra en preparación o ha culminado.";
-
     programa.forEach(item => {
       const div = document.createElement("div");
       div.className = `programa-item ${item.estado}`;
 
       div.innerHTML = `
-        <strong>${item.hora}</strong>
+        <div class="programa-item-head">
+          <strong>${item.hora}</strong>
+          <span class="estado">${formatearEstado(item.estado)}</span>
+        </div>
         <h3>${item.actividad}</h3>
-        <p>${item.responsable}</p>
+        <p>${item.responsable || ""}</p>
         <span class="estado">${formatearEstado(item.estado)}</span>
       `;
+
+      div.querySelector(".estado:last-child").remove();
 
       contenedor.appendChild(div);
     });
@@ -187,6 +219,29 @@ function compartirLibro(titulo) {
     navigator.clipboard.writeText(`${texto} - ${url}`);
     alert("Enlace copiado al portapapeles.");
   }
+}
+
+function openBookDetail(libroId) {
+  const libro = LIBROS[libroId];
+
+  if (!libro) {
+    return;
+  }
+
+  const imagen = document.getElementById("detalleLibroImagen");
+  const titulo = document.getElementById("detalleLibroTitulo");
+  const autores = document.getElementById("detalleLibroAutores");
+  const descripcion = document.getElementById("detalleLibroDescripcion");
+  const compartir = document.getElementById("detalleLibroCompartir");
+
+  imagen.src = libro.imagen;
+  imagen.alt = `Portada del libro ${libro.titulo}`;
+  titulo.textContent = libro.titulo;
+  autores.textContent = libro.autores.join(" • ");
+  descripcion.textContent = libro.descripcion;
+  compartir.onclick = () => compartirLibro(libro.titulo);
+
+  openModal("modalLibroDetalle");
 }
 
 function validarCampos(ids, msgId) {

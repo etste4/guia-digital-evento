@@ -18,41 +18,59 @@
 
   <section class="acciones">
     <button onclick="openModal('modalAsistencia')">✅ Registrar asistencia</button>
-    <a href="#programa">🕘 Ver programa</a>
     <a href="#libros">📚 Libros presentados</a>
-    <button onclick="openModal('modalReflexion')">✍️ Dejar reflexión</button>
-  </section>
-
-  <section class="card en-vivo">
-    <h2>🔴 Evento en vivo</h2>
-    <p id="actividadActual">Cargando actividad actual...</p>
-  </section>
-
-  <section id="programa" class="section">
-    <h2>🕘 Programa del evento</h2>
-    <div id="programaLista"></div>
+    <button onclick="openModal('modalMemoria')">📩 Solicitar memoria</button>
+    <a href="#programa">🕘 Ver programa</a>
+    <button onclick="openModal('modalReflexion')">✍️ Reflexión</button>
   </section>
 
   <section id="libros" class="section">
-    <h2>📚 Libros presentados</h2>
+    <div class="section-heading">
+      <span class="section-kicker">Explora primero</span>
+      <h2>📚 Libros presentados</h2>
+      <p>Accede rápido a cada publicación, revisa sus autores y comparte el contenido desde tu celular.</p>
+    </div>
 
-    <article class="libro">
-      <h3>La Recta Real</h3>
-      <p>Publicación presentada por el Fondo Editorial de la Universidad Nacional de Huancavelica.</p>
-      <button onclick="compartirLibro('La Recta Real')">📤 Compartir</button>
-    </article>
+    <div class="libros-grid">
+      <article class="libro-card">
+        <img src="files/libro1.jpg" alt="Portada del libro La Recta Real" class="libro-imagen">
+        <div class="libro-body">
+          <span class="libro-etiqueta">Fondo Editorial UNH</span>
+          <h3>La Recta Real</h3>
+          <p class="libro-autores">Dr. Cesar Castañeda Campos</p>
+          <div class="libro-acciones">
+            <button onclick="openBookDetail('libro1')">Ver detalles</button>
+            <button class="secondary-btn" onclick="compartirLibro('La Recta Real')">Compartir</button>
+          </div>
+        </div>
+      </article>
 
-    <article class="libro">
-      <h3>Herramientas de Planificación</h3>
-      <p>Publicación presentada por el Fondo Editorial de la Universidad Nacional de Huancavelica.</p>
-      <button onclick="compartirLibro('Herramientas de Planificación')">📤 Compartir</button>
-    </article>
+      <article class="libro-card">
+        <img src="files/libro2.jpg" alt="Portada del libro Herramientas de Planificación" class="libro-imagen">
+        <div class="libro-body">
+          <span class="libro-etiqueta">Fondo Editorial UNH</span>
+          <h3>Herramientas de Planificación</h3>
+          <p class="libro-autores">Joel Lenner Castañeda Dueñas y 7 autores más</p>
+          <div class="libro-acciones">
+            <button onclick="openBookDetail('libro2')">Ver detalles</button>
+            <button class="secondary-btn" onclick="compartirLibro('Herramientas de Planificación')">Compartir</button>
+          </div>
+        </div>
+      </article>
 
-    <article class="libro">
-      <h3>Prueba de Hipótesis Estadística</h3>
-      <p>Publicación presentada por el Fondo Editorial de la Universidad Nacional de Huancavelica.</p>
-      <button onclick="compartirLibro('Prueba de Hipótesis Estadística')">📤 Compartir</button>
-    </article>
+      <article class="libro-card">
+        <img src="files/libro3.jpg" alt="Portada del libro Prueba de Hipótesis Estadística" class="libro-imagen">
+        <div class="libro-body">
+          <span class="libro-etiqueta">Fondo Editorial UNH</span>
+          <h3>Prueba de Hipótesis Estadística</h3>
+          <p class="libro-autores">Félix Amadeo Canales Conce y Franklin Poma Castellanos</p>
+          <div class="libro-acciones">
+            <button onclick="openBookDetail('libro3')">Ver detalles</button>
+            <button class="secondary-btn" onclick="compartirLibro('Prueba de Hipótesis Estadística')">Compartir</button>
+          </div>
+        </div>
+      </article>
+    </div>
   </section>
 
   <section class="card memoria">
@@ -61,7 +79,40 @@
     <button onclick="openModal('modalMemoria')">Solicitar memoria digital</button>
   </section>
 
+  <section id="programa" class="section programa-section">
+    <div class="section-heading compact-heading">
+      <span class="section-kicker">Agenda</span>
+      <h2>🕘 Programa del evento</h2>
+      <p>Consulta rápidamente el orden de actividades del evento.</p>
+    </div>
+    <div id="programaLista" class="programa-lista"></div>
+  </section>
+
+  <section class="card reflexion-card" id="reflexionSection">
+    <h2>✍️ Reflexión para autores</h2>
+    <p>Deja un mensaje breve para los autores y forma parte de la memoria del evento.</p>
+    <button onclick="openModal('modalReflexion')">Escribir reflexión</button>
+  </section>
+
 </main>
+
+<!-- MODAL DETALLE LIBRO -->
+<div class="modal" id="modalLibroDetalle">
+  <div class="modal-content modal-libro-detalle">
+    <span onclick="closeModal('modalLibroDetalle')" class="close">×</span>
+    <img id="detalleLibroImagen" src="" alt="" class="detalle-libro-imagen">
+    <div class="detalle-libro-body">
+      <span class="detalle-libro-kicker">Fondo Editorial UNH</span>
+      <h2 id="detalleLibroTitulo"></h2>
+      <p id="detalleLibroAutores" class="detalle-libro-autores"></p>
+      <p id="detalleLibroDescripcion" class="detalle-libro-descripcion"></p>
+      <div class="detalle-libro-acciones">
+        <button id="detalleLibroCompartir">Compartir</button>
+        <button class="secondary-btn" onclick="closeModal('modalLibroDetalle')">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- MODAL ASISTENCIA -->
 <div class="modal" id="modalAsistencia">
@@ -118,10 +169,10 @@
 </div>
 
 <nav class="bottom-nav">
-  <a href="#programa">🕘<br>Programa</a>
   <a href="#libros">📚<br>Libros</a>
-  <button onclick="openModal('modalReflexion')">✍️<br>Reflexión</button>
   <button onclick="openModal('modalMemoria')">📩<br>Memoria</button>
+  <a href="#programa">🕘<br>Programa</a>
+  <button onclick="openModal('modalReflexion')">✍️<br>Reflexión</button>
 </nav>
 
 <script src="script.js"></script>
