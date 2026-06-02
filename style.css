@@ -53,7 +53,7 @@ body::after {
   margin: auto;
   background: transparent;
   min-height: 100vh;
-  padding-bottom: 80px;
+  padding-bottom: 112px;
 }
 
 .hero {
@@ -533,28 +533,67 @@ textarea {
 
 .bottom-nav {
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(120px);
   max-width: 480px;
-  width: 100%;
-  background: white;
+  width: calc(100% - 20px);
+  background: rgba(255, 255, 255, .94);
+  backdrop-filter: blur(14px);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid #dbe4ee;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid rgba(202, 216, 229, .95);
+  border-radius: 22px;
   padding: 8px 4px 10px;
-  box-shadow: 0 -8px 24px rgba(15, 23, 42, .06);
+  box-shadow: 0 18px 34px rgba(15, 23, 42, .12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .24s ease, transform .24s ease;
+}
+
+.bottom-nav.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
 }
 
 .bottom-nav a,
 .bottom-nav button {
   border: none;
-  background: white;
+  background: transparent;
   color: #334155;
   text-decoration: none;
   text-align: center;
   font-size: 11px;
   font-weight: bold;
+  line-height: 1.2;
+  padding: 4px 0;
+}
+
+.scroll-top-button {
+  position: fixed;
+  right: 16px;
+  bottom: 94px;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #0f5b94, #0a3d69);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 14px 24px rgba(10, 61, 105, .28);
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+  transition: opacity .24s ease, transform .24s ease;
+  z-index: 999;
+}
+
+.scroll-top-button.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 @media (max-width: 640px) {
@@ -605,6 +644,24 @@ textarea {
   .acciones {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+  }
+
+  .bottom-nav {
+    width: calc(100% - 16px);
+    bottom: 8px;
+    padding: 8px 2px 10px;
+  }
+
+  .bottom-nav a,
+  .bottom-nav button {
+    font-size: 10px;
+  }
+
+  .scroll-top-button {
+    right: 12px;
+    bottom: 92px;
+    width: 44px;
+    height: 44px;
   }
 
   .detalle-libro-imagen {

@@ -36,6 +36,8 @@ const LIBROS = {
 document.addEventListener("DOMContentLoaded", () => {
   cargarPrograma();
   setInterval(cargarPrograma, 30000);
+  window.addEventListener("scroll", toggleFloatingNavigation, { passive: true });
+  toggleFloatingNavigation();
 });
 
 function openModal(id) {
@@ -44,6 +46,29 @@ function openModal(id) {
 
 function closeModal(id) {
   document.getElementById(id).style.display = "none";
+}
+
+function toggleFloatingNavigation() {
+  const bottomNav = document.querySelector(".bottom-nav");
+  const scrollTopButton = document.getElementById("scrollTopButton");
+  const scrollY = window.scrollY || window.pageYOffset;
+  const showBottomNav = scrollY > 180;
+  const showScrollTop = scrollY > 320;
+
+  if (bottomNav) {
+    bottomNav.classList.toggle("is-visible", showBottomNav);
+  }
+
+  if (scrollTopButton) {
+    scrollTopButton.classList.toggle("is-visible", showScrollTop);
+  }
+}
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 async function cargarPrograma() {
