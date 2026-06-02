@@ -310,6 +310,67 @@ h2 {
   padding: 14px;
 }
 
+.actividad-actual {
+  margin-bottom: 12px;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid #bfdbfe;
+  background:
+    radial-gradient(circle at top right, rgba(32, 170, 187, .16), transparent 34%),
+    linear-gradient(180deg, #f6fbff, #eef7ff);
+  box-shadow: 0 14px 26px rgba(15, 23, 42, .08);
+}
+
+.actividad-actual.en_proceso {
+  border-color: #86efac;
+  background:
+    radial-gradient(circle at top right, rgba(74, 222, 128, .16), transparent 34%),
+    linear-gradient(180deg, #f4fff7, #ecfdf3);
+}
+
+.actividad-actual.pendiente {
+  border-color: #93c5fd;
+}
+
+.actividad-actual.culminado {
+  border-color: #fca5a5;
+  background:
+    radial-gradient(circle at top right, rgba(248, 113, 113, .14), transparent 34%),
+    linear-gradient(180deg, #fff8f8, #fef2f2);
+}
+
+.actividad-actual-kicker {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .8);
+  color: #0f5b94;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.actividad-actual-hora {
+  margin-top: 10px;
+  color: #0f5b94;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.actividad-actual h3 {
+  margin: 4px 0 6px;
+  color: #0a3d69;
+  font-size: 21px;
+  line-height: 1.2;
+}
+
+.actividad-actual p {
+  margin: 0 0 10px;
+  color: #4b5563;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .programa-lista {
   display: grid;
   gap: 8px;
@@ -339,6 +400,11 @@ h2 {
   border-color: #cbd5e1;
   border-left-color: #64748b;
   background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+}
+
+.programa-item.is-current {
+  transform: scale(1.01);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, .08);
 }
 
 .programa-item-head {
@@ -549,6 +615,7 @@ textarea {
   opacity: 0;
   pointer-events: none;
   transition: opacity .24s ease, transform .24s ease;
+  z-index: 995;
 }
 
 .bottom-nav.is-visible {
@@ -568,6 +635,7 @@ textarea {
   font-weight: bold;
   line-height: 1.2;
   padding: 4px 0;
+  cursor: pointer;
 }
 
 .scroll-top-button {

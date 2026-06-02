@@ -52,7 +52,7 @@ function toggleFloatingNavigation() {
   const bottomNav = document.querySelector(".bottom-nav");
   const scrollTopButton = document.getElementById("scrollTopButton");
   const scrollY = window.scrollY || window.pageYOffset;
-  const showBottomNav = scrollY > 180;
+  const showBottomNav = scrollY > 20;
   const showScrollTop = scrollY > 320;
 
   if (bottomNav) {
@@ -80,11 +80,35 @@ async function cargarPrograma() {
 
     const programa = json.data;
     const contenedor = document.getElementById("programaLista");
+    const actividadActual = document.getElementById("actividadActualDestacada");
+    const actual = obtenerActividadActual(programa);
+
     contenedor.innerHTML = "";
 
-    programa.forEach(item => {
+    if (actividadActual) {
+      if (actual) {
+        actividadActual.hidden = false;
+        actividadActual.innerHTML = `
+          <div class="actividad-actual-kicker">Actividad actual</div>
+          <div class="actividad-actual-hora">${actual.hora || "Ahora"}</div>
+          <h3>${actual.actividad}</h3>
+          <p>${actual.responsable || ""}</p>
+          <span class="estado">${actual.estadoActualLabel}</span>
+        `;
+        actividadActual.className = `actividad-actual ${actual.estadoActualClase}`;
+      } else {
+        actividadActual.hidden = true;
+        actividadActual.innerHTML = "";
+      }
+    }
+
+    programa.forEach((item, index) => {
       const div = document.createElement("div");
       div.className = `programa-item ${item.estado}`;
+
+      if (actual && actual.index === index) {
+        div.classList.add("is-current");
+      }
 
       div.innerHTML = `
         <div class="programa-item-head">
@@ -110,6 +134,43 @@ function formatearEstado(estado) {
   if (estado === "en_proceso") return "En proceso";
   if (estado === "culminado") return "Culminado";
   return "Pendiente";
+}
+
+function obtenerActividadActual(programa) {
+  if (!Array.isArray(programa) || programa.length === 0) {
+    return null;
+  }
+
+  const enProcesoIndex = programa.findIndex(item => item.estado === "en_proceso");
+
+  if (enProcesoIndex !== -1) {
+    return {
+      ...programa[enProcesoIndex],
+      index: enProcesoIndex,
+      estadoActualClase: "en_proceso",
+      estadoActualLabel: "En proceso"
+    };
+  }
+
+  const siguienteIndex = programa.findIndex(item => item.estado !== "culminado");
+
+  if (siguienteIndex !== -1) {
+    return {
+      ...programa[siguienteIndex],
+      index: siguienteIndex,
+      estadoActualClase: "pendiente",
+      estadoActualLabel: "Siguiente actividad"
+    };
+  }
+
+  const ultimaIndex = programa.length - 1;
+
+  return {
+    ...programa[ultimaIndex],
+    index: ultimaIndex,
+    estadoActualClase: "culminado",
+    estadoActualLabel: "Actividad culminada"
+  };
 }
 
 async function enviarAsistencia() {

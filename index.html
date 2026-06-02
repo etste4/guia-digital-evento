@@ -111,19 +111,20 @@
     <button onclick="openModal('modalMemoria')">Solicitar memoria digital</button>
   </section>
 
+  <section class="card reflexion-card" id="reflexionSection">
+    <h2>✍️ Reflexión para autores</h2>
+    <p>Deja un mensaje breve para los autores y forma parte de la memoria del evento.</p>
+    <button onclick="openModal('modalReflexion')">Escribir reflexión</button>
+  </section>
+
   <section id="programa" class="section programa-section">
     <div class="section-heading compact-heading">
       <span class="section-kicker">Agenda</span>
       <h2>🕘 Programa del evento</h2>
       <p>Consulta rápidamente el orden de actividades del evento.</p>
     </div>
+    <div id="actividadActualDestacada" class="actividad-actual" hidden></div>
     <div id="programaLista" class="programa-lista"></div>
-  </section>
-
-  <section class="card reflexion-card" id="reflexionSection">
-    <h2>✍️ Reflexión para autores</h2>
-    <p>Deja un mensaje breve para los autores y forma parte de la memoria del evento.</p>
-    <button onclick="openModal('modalReflexion')">Escribir reflexión</button>
   </section>
 
 </main>
@@ -184,6 +185,7 @@
   <div class="modal-content">
     <span onclick="closeModal('modalMemoria')" class="close">×</span>
     <h2>Recibir memoria digital</h2>
+    <p class="modal-note">En unos dias te enviaremos un PDF con la memoria digital del evento, que incluirá información general, fotografías y contenidos seleccionados.</p>
 
     <input id="memoria_nombre" placeholder="Nombre" required>
 
