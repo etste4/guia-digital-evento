@@ -354,7 +354,7 @@ h2 {
 
 .programa-item.is-current {
   position: relative;
-  padding-top: 34px;
+  padding: 42px 14px 16px;
   transform: scale(1.01);
   box-shadow: 0 14px 28px rgba(15, 23, 42, .10);
 }
@@ -362,15 +362,15 @@ h2 {
 .programa-item.is-current::before {
   content: "Actividad actual";
   position: absolute;
-  top: 10px;
-  left: 11px;
+  top: 12px;
+  left: 14px;
   display: inline-flex;
   align-items: center;
-  padding: 5px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, .82);
   color: #0f5b94;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -380,6 +380,25 @@ h2 {
 
 .programa-item.is-current-culminado::before {
   content: "Última actividad";
+}
+
+.programa-item.is-current strong {
+  font-size: 14px;
+}
+
+.programa-item.is-current h3 {
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.programa-item.is-current p {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.programa-item.is-current .estado {
+  padding: 5px 10px;
+  font-size: 11px;
 }
 
 .programa-item-head {
