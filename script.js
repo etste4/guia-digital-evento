@@ -136,3 +136,72 @@ function compartirLibro(titulo) {
     alert("Enlace copiado al portapapeles.");
   }
 }
+
+function validarCampos(ids, msgId) {
+  let valido = true;
+  const msg = document.getElementById(msgId);
+
+  ids.forEach(id => {
+    const campo = document.getElementById(id);
+    campo.classList.remove("input-error");
+
+    if (!campo.value.trim()) {
+      campo.classList.add("input-error");
+      valido = false;
+    }
+  });
+
+  if (!valido) {
+    msg.textContent = "Completa todos los campos obligatorios.";
+    msg.style.color = "#dc2626";
+    return false;
+  }
+
+  msg.textContent = "";
+  msg.style.color = "#16a34a";
+  return true;
+}
+
+function limpiarFormulario(modalId) {
+  const modal = document.getElementById(modalId);
+  const campos = modal.querySelectorAll("input, select, textarea");
+
+  campos.forEach(campo => {
+    campo.value = "";
+    campo.classList.remove("input-error");
+  });
+
+  const correo = document.getElementById("memoria_correo");
+  const telefono = document.getElementById("memoria_telefono");
+
+  if (correo) correo.style.display = "none";
+  if (telefono) telefono.style.display = "none";
+}
+
+function mostrarExito(modalId, texto) {
+  const modal = document.getElementById(modalId);
+  const content = modal.querySelector(".modal-content");
+
+  const success = document.createElement("div");
+  success.className = "success-box";
+  success.innerHTML = `
+    <div class="success-icon">✓</div>
+    <h3>Registro exitoso</h3>
+    <p>${texto}</p>
+  `;
+
+  content.appendChild(success);
+  success.style.display = "block";
+
+  setTimeout(() => {
+    success.remove();
+    closeModal(modalId);
+  }, 1800);
+}
+
+function obtenerTextoBoton(modalId) {
+  if (modalId === "modalAsistencia") return "Guardar asistencia";
+  if (modalId === "modalReflexion") return "Enviar reflexión";
+  if (modalId === "modalMemoria") return "Solicitar memoria";
+  return "Enviar";
+}
