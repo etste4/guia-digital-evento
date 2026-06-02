@@ -183,16 +183,18 @@ async function enviarAsistencia() {
 }
 
 async function enviarReflexion() {
-  const camposObligatorios = ["reflexion_texto"];
+  const camposObligatorios = ["reflexion_libro", "reflexion_texto"];
 
   if (!validarCampos(camposObligatorios, "msgReflexion")) {
     return;
   }
 
+  const libro = document.getElementById("reflexion_libro").value.trim();
   const nombre = document.getElementById("reflexion_nombre").value.trim() || "Anónimo";
 
   const data = {
     action: "reflexion",
+    libro: libro,
     nombre: nombre,
     reflexion: document.getElementById("reflexion_texto").value.trim()
   };
