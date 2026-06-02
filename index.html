@@ -11,17 +11,38 @@
 <main class="app">
 
   <header class="hero">
-    <span class="tag">Fondo Editorial UNH</span>
-    <h1>Presentación de Libros</h1>
-    <p>Guía digital móvil del evento</p>
+    <div class="hero-shell">
+      <img src="filles/logo_fondo_editorial.png" alt="Logo del Fondo Editorial UNH" class="hero-logo">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">Fondo Editorial UNH</p>
+        <h1>Presentación de Libros</h1>
+        <h2>Fondo Editorial UNH</h2>
+        <p class="hero-subtitle">Guía móvil para asistentes</p>
+      </div>
+    </div>
   </header>
 
   <section class="acciones">
-    <button onclick="openModal('modalAsistencia')">✅ Registrar asistencia</button>
-    <a href="#libros">📚 Libros presentados</a>
-    <button onclick="openModal('modalMemoria')">📩 Solicitar memoria</button>
-    <a href="#programa">🕘 Ver programa</a>
-    <button onclick="openModal('modalReflexion')">✍️ Reflexión</button>
+    <a href="#libros" class="accion-card accion-destacada">
+      <span class="accion-icon">📚</span>
+      <span class="accion-texto">Libros presentados</span>
+    </a>
+    <button onclick="openModal('modalAsistencia')" class="accion-card">
+      <span class="accion-icon">✅</span>
+      <span class="accion-texto">Registrar asistencia</span>
+    </button>
+    <button onclick="openModal('modalMemoria')" class="accion-card">
+      <span class="accion-icon">📩</span>
+      <span class="accion-texto">Solicitar memoria</span>
+    </button>
+    <a href="#programa" class="accion-card">
+      <span class="accion-icon">🕘</span>
+      <span class="accion-texto">Ver programa</span>
+    </a>
+    <button onclick="openModal('modalReflexion')" class="accion-card accion-ancha">
+      <span class="accion-icon">✍️</span>
+      <span class="accion-texto">Reflexión</span>
+    </button>
   </section>
 
   <section id="libros" class="section">
