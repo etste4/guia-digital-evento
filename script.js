@@ -89,7 +89,7 @@ async function cargarPrograma() {
       if (actual) {
         actividadActual.hidden = false;
         actividadActual.innerHTML = `
-          <div class="actividad-actual-kicker">Actividad actual</div>
+          <div class="actividad-actual-kicker">${actual.tituloDestacado}</div>
           <div class="actividad-actual-hora">${actual.hora || "Ahora"}</div>
           <h3>${actual.actividad}</h3>
           <p>${actual.responsable || ""}</p>
@@ -147,6 +147,7 @@ function obtenerActividadActual(programa) {
     return {
       ...programa[enProcesoIndex],
       index: enProcesoIndex,
+      tituloDestacado: "Actividad actual",
       estadoActualClase: "en_proceso",
       estadoActualLabel: "En proceso"
     };
@@ -158,6 +159,7 @@ function obtenerActividadActual(programa) {
     return {
       ...programa[siguienteIndex],
       index: siguienteIndex,
+      tituloDestacado: "Siguiente actividad",
       estadoActualClase: "pendiente",
       estadoActualLabel: "Siguiente actividad"
     };
@@ -168,6 +170,7 @@ function obtenerActividadActual(programa) {
   return {
     ...programa[ultimaIndex],
     index: ultimaIndex,
+    tituloDestacado: "Última actividad",
     estadoActualClase: "culminado",
     estadoActualLabel: "Actividad culminada"
   };
