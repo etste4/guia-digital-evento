@@ -33,8 +33,10 @@
 
     <div class="libros-grid">
       <article class="libro-card">
-        <img src="files/libro1.jpg" alt="Portada del libro La Recta Real" class="libro-imagen">
         <div class="libro-body">
+          <div class="libro-card-top">
+            <span class="libro-preview-badge">Detalle disponible</span>
+          </div>
           <span class="libro-etiqueta">Fondo Editorial UNH</span>
           <h3>La Recta Real</h3>
           <p class="libro-autores">Dr. Cesar Castañeda Campos</p>
@@ -46,8 +48,10 @@
       </article>
 
       <article class="libro-card">
-        <img src="files/libro2.jpg" alt="Portada del libro Herramientas de Planificación" class="libro-imagen">
         <div class="libro-body">
+          <div class="libro-card-top">
+            <span class="libro-preview-badge">Detalle disponible</span>
+          </div>
           <span class="libro-etiqueta">Fondo Editorial UNH</span>
           <h3>Herramientas de Planificación</h3>
           <p class="libro-autores">Joel Lenner Castañeda Dueñas y 7 autores más</p>
@@ -59,8 +63,10 @@
       </article>
 
       <article class="libro-card">
-        <img src="files/libro3.jpg" alt="Portada del libro Prueba de Hipótesis Estadística" class="libro-imagen">
         <div class="libro-body">
+          <div class="libro-card-top">
+            <span class="libro-preview-badge">Detalle disponible</span>
+          </div>
           <span class="libro-etiqueta">Fondo Editorial UNH</span>
           <h3>Prueba de Hipótesis Estadística</h3>
           <p class="libro-autores">Félix Amadeo Canales Conce y Franklin Poma Castellanos</p>
@@ -137,8 +143,9 @@
   <div class="modal-content">
     <span onclick="closeModal('modalReflexion')" class="close">×</span>
     <h2>Compartir reflexión</h2>
+    <p class="modal-note">Si deseas, puedes colocar tu nombre. Si lo dejas vacío, se guardará como Anónimo. Las reflexiones serán revisadas manualmente antes de enviarse al autor.</p>
 
-    <input id="reflexion_nombre" placeholder="Nombre" required>
+    <input id="reflexion_nombre" placeholder="Nombre (opcional)">
     <textarea id="reflexion_texto" placeholder="Escribe tu reflexión para el autor" required></textarea>
 
     <button onclick="enviarReflexion()">Enviar reflexión</button>

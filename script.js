@@ -5,7 +5,7 @@ const LIBROS = {
     titulo: "La Recta Real",
     autores: ["Dr. Cesar Castañeda Campos"],
     descripcion: "Libro presentado por el Fondo Editorial UNH en el marco de la presentación de libros.",
-    imagen: "files/libro1.jpg"
+    imagen: "files/libro3.png"
   },
   libro2: {
     titulo: "Herramientas de Planificación",
@@ -20,7 +20,7 @@ const LIBROS = {
       "Fredy César Mendoza Cruz"
     ],
     descripcion: "Libro práctico y esencial para docentes y estudiantes que buscan fortalecer el pensamiento crítico mediante la planificación.",
-    imagen: "files/libro2.jpg"
+    imagen: "files/libro2.png"
   },
   libro3: {
     titulo: "Prueba de Hipótesis Estadística",
@@ -29,7 +29,7 @@ const LIBROS = {
       "Franklin Poma Castellanos"
     ],
     descripcion: "Publicación aplicada a educación con soporte de Minitab.",
-    imagen: "files/libro3.jpg"
+    imagen: "files/libro1.png"
   }
 };
 
@@ -115,15 +115,17 @@ async function enviarAsistencia() {
 }
 
 async function enviarReflexion() {
-  const camposObligatorios = ["reflexion_nombre", "reflexion_texto"];
+  const camposObligatorios = ["reflexion_texto"];
 
   if (!validarCampos(camposObligatorios, "msgReflexion")) {
     return;
   }
 
+  const nombre = document.getElementById("reflexion_nombre").value.trim() || "Anónimo";
+
   const data = {
     action: "reflexion",
-    nombre: document.getElementById("reflexion_nombre").value.trim(),
+    nombre: nombre,
     reflexion: document.getElementById("reflexion_texto").value.trim()
   };
 
