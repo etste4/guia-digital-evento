@@ -79,7 +79,7 @@ async function enviarAsistencia() {
     celular: document.getElementById("asistencia_celular").value.trim()
   };
 
-  await enviarDatos(data, "msgAsistencia", "Asistencia registrada correctamente.");
+  await enviarDatos(data, "msgAsistencia", "Asistencia registrada correctamente.", "modalAsistencia");
 }
 
 async function enviarReflexion() {
@@ -89,7 +89,7 @@ async function enviarReflexion() {
     reflexion: document.getElementById("reflexion_texto").value
   };
 
-  await enviarDatos(data, "msgReflexion", "Gracias. Tu reflexión fue registrada.");
+  await enviarDatos(data, "msgReflexion", "Gracias. Tu reflexión fue registrada.", "modalReflexion");
 }
 
 async function enviarMemoria() {
@@ -101,10 +101,10 @@ async function enviarMemoria() {
     telefono: document.getElementById("memoria_telefono").value
   };
 
-  await enviarDatos(data, "msgMemoria", "Solicitud registrada correctamente.");
+  await enviarDatos(data, "msgMemoria", "Solicitud registrada correctamente.", "modalMemoria");
 }
 
-async function enviarDatos(data, msgId, textoOk) {
+async function enviarDatos(data, msgId, textoOk, modalId) {
   const msg = document.getElementById(msgId);
   msg.textContent = "Enviando...";
 
@@ -117,7 +117,9 @@ async function enviarDatos(data, msgId, textoOk) {
     const json = await res.json();
 
     if (json.ok) {
-      msg.textContent = textoOk;
+      limpiarFormulario(modalId);
+      msg.textContent = "";
+      mostrarExito(modalId, textoOk);
     } else {
       msg.textContent = "Ocurrió un error. Intenta nuevamente.";
     }
@@ -178,10 +180,15 @@ function validarCampos(ids, msgId) {
 function limpiarFormulario(modalId) {
   const modal = document.getElementById(modalId);
   const campos = modal.querySelectorAll("input, select, textarea");
+  const mensajes = modal.querySelectorAll(".msg");
 
   campos.forEach(campo => {
     campo.value = "";
     campo.classList.remove("input-error");
+  });
+
+  mensajes.forEach(mensaje => {
+    mensaje.textContent = "";
   });
 
   const correo = document.getElementById("memoria_correo");
@@ -194,6 +201,11 @@ function limpiarFormulario(modalId) {
 function mostrarExito(modalId, texto) {
   const modal = document.getElementById(modalId);
   const content = modal.querySelector(".modal-content");
+  const existente = content.querySelector(".success-box");
+
+  if (existente) {
+    existente.remove();
+  }
 
   const success = document.createElement("div");
   success.className = "success-box";
@@ -204,12 +216,11 @@ function mostrarExito(modalId, texto) {
   `;
 
   content.appendChild(success);
-  success.style.display = "block";
 
   setTimeout(() => {
     success.remove();
     closeModal(modalId);
-  }, 1800);
+  }, 2200);
 }
 
 function obtenerTextoBoton(modalId) {
