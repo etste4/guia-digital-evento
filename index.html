@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentación de Libros | Fondo Editorial UNH</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="app">
+
+  <header class="hero">
+    <span class="tag">Fondo Editorial UNH</span>
+    <h1>Presentación de Libros</h1>
+    <p>Guía digital móvil del evento</p>
+  </header>
+
+  <section class="acciones">
+    <button onclick="openModal('modalAsistencia')">✅ Registrar asistencia</button>
+    <a href="#programa">🕘 Ver programa</a>
+    <a href="#libros">📚 Libros presentados</a>
+    <button onclick="openModal('modalReflexion')">✍️ Dejar reflexión</button>
+  </section>
+
+  <section class="card en-vivo">
+    <h2>🔴 Evento en vivo</h2>
+    <p id="actividadActual">Cargando actividad actual...</p>
+  </section>
+
+  <section id="programa" class="section">
+    <h2>🕘 Programa del evento</h2>
+    <div id="programaLista"></div>
+  </section>
+
+  <section id="libros" class="section">
+    <h2>📚 Libros presentados</h2>
+
+    <article class="libro">
+      <h3>La Recta Real</h3>
+      <p>Publicación presentada por el Fondo Editorial de la Universidad Nacional de Huancavelica.</p>
+      <button onclick="compartirLibro('La Recta Real')">📤 Compartir</button>
+    </article>
+
+    <article class="libro">
+      <h3>Herramientas de Planificación</h3>
+      <p>Publicación presentada por el Fondo Editorial de la Universidad Nacional de Huancavelica.</p>
+      <button onclick="compartirLibro('Herramientas de Planificación')">📤 Compartir</button>
+    </article>
+
+    <article class="libro">
+      <h3>Prueba de Hipótesis Estadística</h3>
+      <p>Publicación presentada por el Fondo Editorial de la Universidad Nacional de Huancavelica.</p>
+      <button onclick="compartirLibro('Prueba de Hipótesis Estadística')">📤 Compartir</button>
+    </article>
+  </section>
+
+  <section class="card memoria">
+    <h2>📩 Memoria digital</h2>
+    <p>Solicita recibir la memoria digital del evento con información, fotografías y reflexiones seleccionadas.</p>
+    <button onclick="openModal('modalMemoria')">Solicitar memoria digital</button>
+  </section>
+
+</main>
+
+<!-- MODAL ASISTENCIA -->
+<div class="modal" id="modalAsistencia">
+  <div class="modal-content">
+    <span onclick="closeModal('modalAsistencia')" class="close">×</span>
+    <h2>Registrar asistencia</h2>
+
+    <input id="asistencia_nombre" placeholder="Nombres y apellidos">
+    <input id="asistencia_correo" placeholder="Correo electrónico">
+    <input id="asistencia_dni" placeholder="D.N.I.">
+
+    <select id="asistencia_cargo">
+      <option value="">Seleccione cargo</option>
+      <option>Estudiante</option>
+      <option>Docente</option>
+      <option>Administrativo</option>
+      <option>Otro</option>
+    </select>
+
+    <input id="asistencia_dependencia" placeholder="Escuela / Departamento / Oficina">
+    <input id="asistencia_celular" placeholder="Número de celular">
+
+    <button onclick="enviarAsistencia()">Guardar asistencia</button>
+    <p class="msg" id="msgAsistencia"></p>
+  </div>
+</div>
+
+<!-- MODAL REFLEXION -->
+<div class="modal" id="modalReflexion">
+  <div class="modal-content">
+    <span onclick="closeModal('modalReflexion')" class="close">×</span>
+    <h2>Compartir reflexión</h2>
+
+    <input id="reflexion_nombre" placeholder="Nombre (opcional)">
+    <textarea id="reflexion_texto" placeholder="Escribe tu reflexión para el autor"></textarea>
+
+    <button onclick="enviarReflexion()">Enviar reflexión</button>
+    <p class="msg" id="msgReflexion"></p>
+  </div>
+</div>
+
+<!-- MODAL MEMORIA -->
+<div class="modal" id="modalMemoria">
+  <div class="modal-content">
+    <span onclick="closeModal('modalMemoria')" class="close">×</span>
+    <h2>Recibir memoria digital</h2>
+
+    <input id="memoria_nombre" placeholder="Nombre">
+
+    <select id="memoria_medio" onchange="mostrarCampoMedio()">
+      <option value="">¿Dónde deseas recibirla?</option>
+      <option value="correo">Correo electrónico</option>
+      <option value="whatsapp">WhatsApp</option>
+    </select>
+
+    <input id="memoria_correo" placeholder="Correo electrónico" style="display:none;">
+    <input id="memoria_telefono" placeholder="Número de WhatsApp" style="display:none;">
+
+    <button onclick="enviarMemoria()">Solicitar memoria</button>
+    <p class="msg" id="msgMemoria"></p>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <a href="#programa">🕘<br>Programa</a>
+  <a href="#libros">📚<br>Libros</a>
+  <button onclick="openModal('modalReflexion')">✍️<br>Reflexión</button>
+  <button onclick="openModal('modalMemoria')">📩<br>Memoria</button>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>
