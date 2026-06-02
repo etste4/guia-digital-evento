@@ -83,22 +83,43 @@ async function enviarAsistencia() {
 }
 
 async function enviarReflexion() {
+  const camposObligatorios = ["reflexion_nombre", "reflexion_texto"];
+
+  if (!validarCampos(camposObligatorios, "msgReflexion")) {
+    return;
+  }
+
   const data = {
     action: "reflexion",
-    nombre: document.getElementById("reflexion_nombre").value,
-    reflexion: document.getElementById("reflexion_texto").value
+    nombre: document.getElementById("reflexion_nombre").value.trim(),
+    reflexion: document.getElementById("reflexion_texto").value.trim()
   };
 
   await enviarDatos(data, "msgReflexion", "Gracias. Tu reflexión fue registrada.", "modalReflexion");
 }
 
 async function enviarMemoria() {
+  const camposObligatorios = ["memoria_nombre", "memoria_medio"];
+  const medio = document.getElementById("memoria_medio").value;
+
+  if (medio === "correo") {
+    camposObligatorios.push("memoria_correo");
+  }
+
+  if (medio === "whatsapp") {
+    camposObligatorios.push("memoria_telefono");
+  }
+
+  if (!validarCampos(camposObligatorios, "msgMemoria")) {
+    return;
+  }
+
   const data = {
     action: "memoria",
-    nombre: document.getElementById("memoria_nombre").value,
-    medio_envio: document.getElementById("memoria_medio").value,
-    correo: document.getElementById("memoria_correo").value,
-    telefono: document.getElementById("memoria_telefono").value
+    nombre: document.getElementById("memoria_nombre").value.trim(),
+    medio_envio: medio,
+    correo: document.getElementById("memoria_correo").value.trim(),
+    telefono: document.getElementById("memoria_telefono").value.trim()
   };
 
   await enviarDatos(data, "msgMemoria", "Solicitud registrada correctamente.", "modalMemoria");
@@ -132,8 +153,24 @@ async function enviarDatos(data, msgId, textoOk, modalId) {
 
 function mostrarCampoMedio() {
   const medio = document.getElementById("memoria_medio").value;
-  document.getElementById("memoria_correo").style.display = medio === "correo" ? "block" : "none";
-  document.getElementById("memoria_telefono").style.display = medio === "whatsapp" ? "block" : "none";
+  const correo = document.getElementById("memoria_correo");
+  const telefono = document.getElementById("memoria_telefono");
+
+  correo.style.display = medio === "correo" ? "block" : "none";
+  telefono.style.display = medio === "whatsapp" ? "block" : "none";
+
+  correo.required = medio === "correo";
+  telefono.required = medio === "whatsapp";
+
+  if (medio !== "correo") {
+    correo.value = "";
+    correo.classList.remove("input-error");
+  }
+
+  if (medio !== "whatsapp") {
+    telefono.value = "";
+    telefono.classList.remove("input-error");
+  }
 }
 
 function compartirLibro(titulo) {
