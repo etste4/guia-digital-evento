@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbyRWVk7B01kljV0KulxShnqFpVM4XM-XCgVcVDFdG_lRDZ6Rn1AF1eMynAkgd8dzClCyQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwNthcDH5XbULL6YaEQjbivAeX6sLQ-x7gTTqwFrN2t-iC5IsYXgpMAKkZo39rbDIjqVQ/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
   cargarPrograma();
