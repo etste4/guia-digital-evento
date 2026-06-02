@@ -80,35 +80,17 @@ async function cargarPrograma() {
 
     const programa = json.data;
     const contenedor = document.getElementById("programaLista");
-    const actividadActual = document.getElementById("actividadActualDestacada");
     const actual = obtenerActividadActual(programa);
 
     contenedor.innerHTML = "";
 
-    if (actividadActual) {
-      if (actual) {
-        actividadActual.hidden = false;
-        actividadActual.innerHTML = `
-          <div class="actividad-actual-kicker">${actual.tituloDestacado}</div>
-          <div class="actividad-actual-hora">${actual.hora || "Ahora"}</div>
-          <h3>${actual.actividad}</h3>
-          <p>${actual.responsable || ""}</p>
-          <span class="estado">${actual.estadoActualLabel}</span>
-        `;
-        actividadActual.className = `actividad-actual ${actual.estadoActualClase}`;
-      } else {
-        actividadActual.hidden = true;
-        actividadActual.innerHTML = "";
-      }
-    }
-
     programa.forEach((item, index) => {
-      if (actual && actual.index === index) {
-        return;
-      }
-
       const div = document.createElement("div");
       div.className = `programa-item ${item.estado}`;
+
+      if (actual && actual.index === index) {
+        div.classList.add("is-current", `is-current-${actual.estadoActualClase}`);
+      }
 
       div.innerHTML = `
         <div class="programa-item-head">
@@ -147,7 +129,6 @@ function obtenerActividadActual(programa) {
     return {
       ...programa[enProcesoIndex],
       index: enProcesoIndex,
-      tituloDestacado: "Actividad actual",
       estadoActualClase: "en_proceso",
       estadoActualLabel: "En proceso"
     };
@@ -159,7 +140,6 @@ function obtenerActividadActual(programa) {
     return {
       ...programa[siguienteIndex],
       index: siguienteIndex,
-      tituloDestacado: "Siguiente actividad",
       estadoActualClase: "pendiente",
       estadoActualLabel: "Siguiente actividad"
     };
@@ -170,7 +150,6 @@ function obtenerActividadActual(programa) {
   return {
     ...programa[ultimaIndex],
     index: ultimaIndex,
-    tituloDestacado: "Última actividad",
     estadoActualClase: "culminado",
     estadoActualLabel: "Actividad culminada"
   };
