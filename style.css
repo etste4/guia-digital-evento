@@ -42,33 +42,20 @@ body {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 8px 12px 14px;
+  padding: 10px 12px 16px;
 }
 
 .hero-logo {
   width: 100%;
-  max-width: 150px;
+  max-width: 230px;
   height: auto;
   display: block;
-  margin: 0 auto 10px;
+  margin: 0 auto 12px;
 }
 
 .hero-copy {
-  max-width: 300px;
+  max-width: 320px;
   margin: 0 auto;
-}
-
-.hero-eyebrow {
-  display: inline-block;
-  margin: 0 0 8px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: rgba(0, 90, 156, .08);
-  color: #0f5b94;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  text-transform: uppercase;
 }
 
 .hero h1 {
@@ -79,7 +66,7 @@ body {
 }
 
 .hero h2 {
-  margin: 6px 0 0;
+  margin: 8px 0 0;
   font-size: 15px;
   font-weight: 700;
   color: #15708d;
@@ -87,10 +74,11 @@ body {
 
 .hero-subtitle {
   margin: 10px auto 0;
-  max-width: 220px;
+  max-width: 240px;
   font-size: 13px;
   line-height: 1.4;
   color: #5b6f84;
+  text-align: center;
 }
 
 .hero p {
@@ -535,6 +523,11 @@ textarea {
 
   .hero-shell {
     padding: 6px 10px 12px;
+  }
+
+  .hero-logo {
+    max-width: 210px;
+    margin-bottom: 10px;
   }
 
   .hero h1 {
