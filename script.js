@@ -56,14 +56,27 @@ function formatearEstado(estado) {
 }
 
 async function enviarAsistencia() {
+  const camposObligatorios = [
+    "asistencia_nombre",
+    "asistencia_correo",
+    "asistencia_dni",
+    "asistencia_cargo",
+    "asistencia_dependencia",
+    "asistencia_celular"
+  ];
+
+  if (!validarCampos(camposObligatorios, "msgAsistencia")) {
+    return;
+  }
+
   const data = {
     action: "asistencia",
-    nombres_apellidos: document.getElementById("asistencia_nombre").value,
-    correo: document.getElementById("asistencia_correo").value,
-    dni: document.getElementById("asistencia_dni").value,
-    cargo: document.getElementById("asistencia_cargo").value,
-    dependencia: document.getElementById("asistencia_dependencia").value,
-    celular: document.getElementById("asistencia_celular").value
+    nombres_apellidos: document.getElementById("asistencia_nombre").value.trim(),
+    correo: document.getElementById("asistencia_correo").value.trim(),
+    dni: document.getElementById("asistencia_dni").value.trim(),
+    cargo: document.getElementById("asistencia_cargo").value.trim(),
+    dependencia: document.getElementById("asistencia_dependencia").value.trim(),
+    celular: document.getElementById("asistencia_celular").value.trim()
   };
 
   await enviarDatos(data, "msgAsistencia", "Asistencia registrada correctamente.");

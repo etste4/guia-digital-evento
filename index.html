@@ -69,11 +69,11 @@
     <span onclick="closeModal('modalAsistencia')" class="close">×</span>
     <h2>Registrar asistencia</h2>
 
-    <input id="asistencia_nombre" placeholder="Nombres y apellidos">
-    <input id="asistencia_correo" placeholder="Correo electrónico">
-    <input id="asistencia_dni" placeholder="D.N.I.">
+    <input id="asistencia_nombre" placeholder="Nombres y apellidos" required>
+    <input id="asistencia_correo" placeholder="Correo electrónico" type="email" required>
+    <input id="asistencia_dni" placeholder="D.N.I." required>
 
-    <select id="asistencia_cargo">
+    <select id="asistencia_cargo" required>
       <option value="">Seleccione cargo</option>
       <option>Estudiante</option>
       <option>Docente</option>
@@ -81,8 +81,8 @@
       <option>Otro</option>
     </select>
 
-    <input id="asistencia_dependencia" placeholder="Escuela / Departamento / Oficina">
-    <input id="asistencia_celular" placeholder="Número de celular">
+    <input id="asistencia_dependencia" placeholder="Escuela / Departamento / Oficina" required>
+    <input id="asistencia_celular" placeholder="Número de celular" required>
 
     <button onclick="enviarAsistencia()">Guardar asistencia</button>
     <p class="msg" id="msgAsistencia"></p>
