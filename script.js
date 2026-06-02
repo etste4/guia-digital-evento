@@ -103,12 +103,12 @@ async function cargarPrograma() {
     }
 
     programa.forEach((item, index) => {
+      if (actual && actual.index === index) {
+        return;
+      }
+
       const div = document.createElement("div");
       div.className = `programa-item ${item.estado}`;
-
-      if (actual && actual.index === index) {
-        div.classList.add("is-current");
-      }
 
       div.innerHTML = `
         <div class="programa-item-head">

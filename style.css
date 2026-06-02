@@ -306,6 +306,17 @@ h2 {
   background: linear-gradient(180deg, #f4f9ff, #ffffff);
 }
 
+.acciones-secundarias {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px;
+}
+
+.acciones-secundarias .card {
+  margin: 0;
+}
+
 .programa-section {
   padding: 14px;
 }
