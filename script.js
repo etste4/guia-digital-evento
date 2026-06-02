@@ -5,7 +5,7 @@ const LIBROS = {
     titulo: "La Recta Real",
     autores: ["Dr. Cesar Castañeda Campos"],
     descripcion: "Libro presentado por el Fondo Editorial UNH en el marco de la presentación de libros.",
-    imagen: "filles/libro3.png"
+    imagen: "files/libro3.png"
   },
   libro2: {
     titulo: "Herramientas de Planificación",
@@ -20,7 +20,7 @@ const LIBROS = {
       "Fredy César Mendoza Cruz"
     ],
     descripcion: "Libro práctico y esencial para docentes y estudiantes que buscan fortalecer el pensamiento crítico mediante la planificación.",
-    imagen: "filles/libro2.png"
+    imagen: "files/libro2.png"
   },
   libro3: {
     titulo: "Prueba de Hipótesis Estadística",
@@ -29,7 +29,7 @@ const LIBROS = {
       "Franklin Poma Castellanos"
     ],
     descripcion: "Publicación aplicada a educación con soporte de Minitab.",
-    imagen: "filles/libro1.png"
+    imagen: "files/libro1.png"
   }
 };
 
