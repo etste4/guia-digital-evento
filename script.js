@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwNthcDH5XbULL6YaEQjbivAeX6sLQ-x7gTTqwFrN2t-iC5IsYXgpMAKkZo39rbDIjqVQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycby8y-Ryz_qviiV4KICFvc0WiMidSOvct_qdhfeGhNwJSF7PakY_IHTLOKNq7gidIzFk/exec";
 
 const LIBROS = {
   libro1: {
@@ -231,7 +231,14 @@ async function enviarMemoria() {
 
 async function enviarDatos(data, msgId, textoOk, modalId) {
   const msg = document.getElementById(msgId);
-  msg.textContent = "Enviando...";
+  const boton = document.querySelector(`#${modalId} button[onclick]`);
+
+  msg.textContent = "";
+  mostrarEstadoEnvio(modalId, "Enviando información", "Espera un momento mientras registramos tus datos.");
+
+  if (boton) {
+    boton.disabled = true;
+  }
 
   try {
     const res = await fetch(API_URL, {
@@ -242,16 +249,23 @@ async function enviarDatos(data, msgId, textoOk, modalId) {
     const json = await res.json();
 
     if (json.ok) {
+      ocultarEstadoEnvio(modalId);
       limpiarFormulario(modalId);
       msg.textContent = "";
       mostrarExito(modalId, textoOk);
     } else {
+      ocultarEstadoEnvio(modalId);
       msg.textContent = "Ocurrió un error. Intenta nuevamente.";
     }
 
   } catch (error) {
+    ocultarEstadoEnvio(modalId);
     console.error(error);
     msg.textContent = "No se pudo enviar. Revisa tu conexión.";
+  } finally {
+    if (boton) {
+      boton.disabled = false;
+    }
   }
 }
 
@@ -387,9 +401,38 @@ function mostrarExito(modalId, texto) {
   }, 2200);
 }
 
+function mostrarEstadoEnvio(modalId, titulo, texto) {
+  const modal = document.getElementById(modalId);
+  const content = modal.querySelector(".modal-content");
+  const existente = content.querySelector(".sending-box");
+
+  if (existente) {
+    existente.remove();
+  }
+
+  const sending = document.createElement("div");
+  sending.className = "sending-box";
+  sending.innerHTML = `
+    <div class="sending-spinner"></div>
+    <h3>${titulo}</h3>
+    <p>${texto}</p>
+  `;
+
+  content.appendChild(sending);
+}
+
+function ocultarEstadoEnvio(modalId) {
+  const modal = document.getElementById(modalId);
+  const sending = modal.querySelector(".sending-box");
+
+  if (sending) {
+    sending.remove();
+  }
+}
+
 function obtenerTextoBoton(modalId) {
   if (modalId === "modalAsistencia") return "Guardar asistencia";
-  if (modalId === "modalReflexion") return "Enviar reflexión";
+  if (modalId === "modalReflexion") return "Enviar mensaje";
   if (modalId === "modalMemoria") return "Solicitar memoria";
   return "Enviar";
 }
